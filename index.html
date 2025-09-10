@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Party CR Helper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <noscript>
+    <div class="wrap">
+      JavaScript is required. Turn it on unless you’re trying to LARP as a 1998 web browser.
+    </div>
+  </noscript>
+
+  <main class="wrap" aria-labelledby="title">
+    <h1 id="title">Party CR Helper</h1>
+    <p>In a given encounter, choose the monsters that make sense in the current story, location, and situation.</p>
+    <p>Determine if the encounter may be deadly. <b>An encounter may be deadly if the sum total of monster challenge 
+        ratings is greater than one quarter of the sum total of character levels, or half the sum total of character 
+        levels if the characters are above 4th level. A single monster may be deadly if its CR is greater than the 
+        average of character levels or greater than 1.5 x the average of character levels if they're above 4th level.</b></p>
+    <div class="grid" style="grid-template-columns: 1fr 140px;">
+      <div>
+        <label for="playerCount">Number of players</label>
+        <p class="help">Enter 1–99 (two digits only). Levels will appear below.</p>
+      </div>
+      <input id="playerCount" name="playerCount" type="number" inputmode="numeric"
+             min="1" max="99" placeholder="e.g., 5" aria-describedby="pcHelp" />
+    </div>
+
+    <section id="playersSection" class="players" aria-live="polite" aria-atomic="true"></section>
+
+    <div class="actions">
+      <button id="calcBtn" type="button" disabled>Calculate CR</button>
+      <!-- <span id="status" class="msg" role="status" aria-live="polite"></span> -->
+    </div>
+
+    <!-- Results panel -->
+    <!-- <section class="result" id="result" aria-live="polite" aria-atomic="true"> -->
+        <h2 class="sr-only">Results</h2>
+        <div class="kpi">
+            <div class="kpi-label">Total Encounter CR</div>
+            <div class="kpi-value" id="maxCR">—</div>
+        </div>
+        <div class="kpi">
+            <div class="kpi-label">Max Single Monster CR Level</div>
+            <div class="kpi-value" id="singleCR">—</div>
+        </div>
+    <!-- </section> -->
+
+    <p class="note">
+      The button dispatches a <code>calculateCR</code> CustomEvent with <code>{ levels: number[] }</code>.
+      Open DevTools Console to see it in action.
+    </p>
+  </main>
+
+  <script src="controller.js"></script>
+</body>
+</html>
